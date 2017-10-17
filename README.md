@@ -32,7 +32,7 @@ my.predicted <- predict(nls.fit, data.frame(x = my.x))
 mod.pred <- data.frame(x = my.x,
                        y = my.predicted)
 plot(d)
-lines(y ~ d, data = mod.pred)
+lines(y ~ x, data = mod.pred)
 
 require(ggplot2)
 p <- ggplot(d, aes(x = x, y = y))
