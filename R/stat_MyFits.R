@@ -3,6 +3,7 @@
 #' @description Calculates either an inverse quadratic, a bell-shaped or a waiting-in-line fit of data as a \code{ggplot2} layer. Calculated using \code{MyFits::MyFits}.
 #' @param fit Name of the fit-equation to be used. Either \code{Inverse_quad} for an inverse quadratic equation \code{y ~ x / (a + b*x + c*x^2)}, \code{Bell} for a bell shaped curve \code{y ~ amp * exp(-0.5*((x - xmean)/xsd)^2)}, or \code{Wait} for waiting-in-line \code{y ~ A * kw * x * exp(-kw*x)}. See \code{MyFits}.
 # '@inheritParams StatMyFits
+#' @inheritParams ggplot2::stat_summary
 #' @inheritParams ggplot2::layer
 #' @seealso  \code{MyFits}, \code{ggplot2}
 #' @examples
