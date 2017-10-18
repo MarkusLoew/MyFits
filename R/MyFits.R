@@ -14,6 +14,7 @@
 #' d <- data.frame(x = 1:10,
 #'                 y = c(0.5, 2, 10, 9, 8, 6.5, 5, 4, 3, 2.5))
 #' MyFits(x = x, y = y, data = d)
+#' MyFits(x = x, y = y, data = d, start.a = 1.5, start.b = 0.5, start.c = 0.05)
 #' MyFits(x = x, y = y, data = d, fit = "Wait")
 #' nls.fit <- MyFits(x = x, y = y, data = d, fit = "Inverse_quad", model = TRUE)
 #' my.x <- seq(min(d$x), max(d$x), length.out = 100)
@@ -45,6 +46,7 @@ MyFits <- function(x, y, data,
     message("Determining start values")
     
     if (fit == "Inverse_quad") {
+      message(fit)
       my.eq   <- stats::formula(y ~ x / (a + b*x + c*x^2))
       start.a <- min(x[x>0], na.rm = TRUE) / 10
       start.b <- max(y,      na.rm = TRUE) 
@@ -54,6 +56,7 @@ MyFits <- function(x, y, data,
     }
     
     if (fit == "Bell") {
+      message(fit)
       my.eq <- stats::formula(y ~ amp * exp(-0.5*((x - xmean)/xsd)^2))
       start.amp   <- max(y,  na.rm = TRUE) 
       start.xmean <- mean(x, na.rm = TRUE)
@@ -63,6 +66,7 @@ MyFits <- function(x, y, data,
     }
     
     if (fit == "Wait") {
+      message(fit)
       my.eq    <- stats::formula(y ~ A * kw * x * exp(-kw*x))
       start.A  <- max(y, na.rm = TRUE) # scaling constant for height of curve
       # find x-value of maximum
@@ -75,6 +79,8 @@ MyFits <- function(x, y, data,
   } else {
     message("Using provided start values")
     if (fit == "Inverse_quad") {
+      message(fit)
+      my.eq   <- stats::formula(y ~ x / (a + b*x + c*x^2))
       start.a <- start.a
       start.b <- start.b
       start.c <- start.b
@@ -83,6 +89,8 @@ MyFits <- function(x, y, data,
     }
     
     if (fit == "Bell") {
+      message(fit)
+      my.eq <- stats::formula(y ~ amp * exp(-0.5*((x - xmean)/xsd)^2))
       start.amp   <- start.a
       start.xmean <- start.b
       start.xsd   <- start.c
@@ -91,6 +99,8 @@ MyFits <- function(x, y, data,
     }
     
     if (fit == "Wait") {
+      message(fit)
+      my.eq    <- stats::formula(y ~ A * kw * x * exp(-kw*x))
       start.A  <- start.a
       start.kw <- start.b
       start.para <- c(start.A, start.kw)

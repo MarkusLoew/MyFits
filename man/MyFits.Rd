@@ -33,6 +33,7 @@ Fits one of three curves to x, y data using \code{nls}. Available fitting functi
 d <- data.frame(x = 1:10,
                 y = c(0.5, 2, 10, 9, 8, 6.5, 5, 4, 3, 2.5))
 MyFits(x = x, y = y, data = d)
+MyFits(x = x, y = y, data = d, start.a = 1.5, start.b = 0.5, start.c = 0.05)
 MyFits(x = x, y = y, data = d, fit = "Wait")
 nls.fit <- MyFits(x = x, y = y, data = d, fit = "Inverse_quad", model = TRUE)
 my.x <- seq(min(d$x), max(d$x), length.out = 100)

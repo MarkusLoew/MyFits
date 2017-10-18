@@ -6,7 +6,8 @@
 \usage{
 stat_myfits(mapping = NULL, data = NULL, geom = "path",
   position = "identity", na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE, fit, ...)
+  inherit.aes = TRUE, fit, start.a = NA, start.b = NA, start.c = NA,
+  ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
@@ -48,6 +49,12 @@ the default plot specification, e.g. \code{\link{borders}}.}
 
 \item{fit}{Name of the fit-equation to be used. Either \code{Inverse_quad} for an inverse quadratic equation \code{y ~ x / (a + b*x + c*x^2)}, \code{Bell} for a bell shaped curve \code{y ~ amp * exp(-0.5*((x - xmean)/xsd)^2)}, or \code{Wait} for waiting-in-line \code{y ~ A * kw * x * exp(-kw*x)}. See \code{MyFits}.}
 
+\item{start.a}{optional initial guess for the curve fit coefficients \code{a}, \code{amp}, or \code{A} (depends on which equation was selected). Default is NA, i.e. an internal guess is used to determine \code{start.a}.}
+
+\item{start.b}{optional initial guess for the second curve fit coefficient for the \code{b}, \code{xmean} or \code{kw} parameter. Default is NA, i.e. an internal guess is used to determine \code{start.b}.}
+
+\item{start.c}{optional initial guess for the third curve fit coefficient. Either \code{c} in case of \code{Inverse_quad} or \code{xsd} in case of \code{Bell}. Not used for \code{Wait} as it only uses two coefficients. Default is NA, i.e. an internal guess is used to determine \code{start.c}.}
+
 \item{...}{other arguments passed on to \code{\link{layer}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
 \code{color = "red"} or \code{size = 3}. They may also be parameters
@@ -59,6 +66,7 @@ Calculates either an inverse quadratic, a bell-shaped or a waiting-in-line fit o
 \examples{
 d <- data.frame(x = 1:10,
                 y = c(0.5, 2, 10, 9, 8, 6.5, 5, 4, 3, 2.5))
+
 require(ggplot2)
 p <- ggplot(d, aes(x = x, y = y))
  p <- p + geom_point()
@@ -66,6 +74,13 @@ p <- ggplot(d, aes(x = x, y = y))
  p <- p + stat_myfits(fit = "Bell", colour = "red")
  p <- p + stat_myfits(fit = "Wait", colour = "green")
 p 
+
+# providing inital guesses for the start values.
+p <- ggplot(d, aes(x = x, y = y))
+  p <- p + geom_point()
+  p <- p + stat_myfits(fit = "Bell", colour = "blue", 
+           start.a = 10, start.b = 1, start.c = 5)
+p
 
 }
 \seealso{
