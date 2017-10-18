@@ -111,7 +111,7 @@ MyFits <- function(x, y, data,
   the.names <- c(names(start.para), "R2")
   
   nls.fit <- try(stats::nls(my.eq,
-                     data = data,
+                     #data = data,
                      trace = FALSE, 
                      start = start.para,
                      control = stats::nls.control(minFactor = 1/40000, 
@@ -121,6 +121,7 @@ MyFits <- function(x, y, data,
      out <- rep(NA, length(the.names))
      names(out) <- the.names
      if (model == TRUE) {
+       message("No fit")
        return("No fit")
      } else {
        return(out)

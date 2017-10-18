@@ -1,6 +1,6 @@
 Package: MyFits
 Title: Fits either an inverse quadratic, a bell-shaped or a waiting-in-line curve to data
-Version: 0.0.0.2
+Version: 0.0.0.3
 Authors@R: person("Markus", "Loew", email = "m.loew@unimelb.edu.au", role = c("aut", "cre"))
 Description: Fits one of three functions (inverse quadratic, bell-shaped, or waiting-in-line) to x, y data using \code{nls}.
 Depends: R (>= 3.2)
